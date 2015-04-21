@@ -34,6 +34,10 @@ gem "font-awesome-rails"
 
 gem 'geocoder'
 
+gem 'twitter', '~> 5.14.0'
+
+gem 'instagram'
+
 group :development do
  gem 'pry-rails'
  gem 'pry-stack_explorer'
