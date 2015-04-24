@@ -38,6 +38,8 @@ gem 'twitter', '~> 5.14.0'
 
 gem 'instagram'
 
+
+
 group :development do
  gem 'pry-rails'
  gem 'pry-stack_explorer'
@@ -59,5 +61,10 @@ group :development, :test do
   gem 'spring'
 
   gem 'rspec-rails'
+end
+
+group :test do 
+  gem 'vcr'
+  gem 'webmock'
 end
 
