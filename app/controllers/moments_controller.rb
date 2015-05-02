@@ -1,28 +1,36 @@
 class MomentsController < ApplicationController
   def index
-  end
-
-  def create
-  end
-
-  def new
-  end
-
-  def edit
-  end
-
-  def show
-  end
-
-  def update
-  end
-
-  def destroys
+    @moments = InstagramMoment.new(lat, long, time).instagrams
   end
 
   private
-  def moment_params
-      params.require(:moment).permit(:post_author, :post_content, :post_image, :post_time, :post_date, :post_location, :post_url, :post_medium)
+
+  def location
+    #if location is nil search with geocoder otherwise return the location 
+    @location ||= Geocoder.search(params[:location]).first
   end
 
+  def lat
+    location.coordinates[0]
+  end
+
+  def long
+    location.coordinates[1]
+  end
+
+  def time
+    Time.now
+  end
 end
+
+# when a request is made to the index action, the instagram moment is creates
+# first it will look at the lat argument, and then go to the lat method
+# the lat method calls the location method
+# if there is no location, the location method requests the data from Google via geocoder
+# and assigns the result to @location 
+# it returns a geocoder object containing the data
+# the lat method then calls .coordinates on the Geocoder object, 
+# and accesses the first element to get the lat
+# the new instagram moment repeats this process for long, 
+# but when it hits the location method, the location is already stored, so there is no need
+# for a second request to Google 
