@@ -3,21 +3,27 @@ require 'rails_helper'
 RSpec.describe InstagramMoment do
 
     describe '#instagrams', :vcr do
-      let(:moments) { InstagramMoment.new() }
+      let(:moments) { InstagramMoment.new(latitude.to_s, longitude.to_s, time) }
       let(:instagrams) { moments.instagrams }
+      let(:longitude) { 151.2777 }
+      let(:latitude) { -33.8910 }
+      let(:time) { Date.parse('22/04/2015').to_time }
 
       it "contains instagrams" do
         expect(instagrams).to be_an Array
         expect(instagrams.first).to be_a Hash
       end
 
-      # it 'is around the time provided' do
-      #   expect(tweets.first.created_at).to be_within(2.days).of(time)
-      # end
+      it 'is around the time provided' do
+        gram_time = instagrams.first["created_time"]
+        expect(gram_time.to_i).to be_within(4.hours.to_i).of(time.to_i)
+      end
 
-      # it 'is around the location provided' do
-      #   expect(tweets.first.geo?).to eq true
-      # end
+      it 'is around the location provided' do
+        expect(instagrams.first["location"]["latitude"]).to be_within(1).of(latitude)
+        expect(instagrams.first["location"]["longitude"]).to be_within(1).of(longitude)
+      end
+
     end
 
 end

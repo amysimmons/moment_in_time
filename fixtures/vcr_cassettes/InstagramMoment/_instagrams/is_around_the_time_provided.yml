@@ -19,7 +19,7 @@ http_interactions:
       message: OK
     headers:
       X-Ratelimit-Remaining:
-      - '4988'
+      - '4987'
       Content-Language:
       - en
       Expires:
@@ -33,11 +33,11 @@ http_interactions:
       Cache-Control:
       - private, no-cache, no-store, must-revalidate
       Date:
-      - Sat, 02 May 2015 03:14:19 GMT
+      - Sat, 02 May 2015 03:14:20 GMT
       Content-Type:
       - application/json; charset=utf-8
       Set-Cookie:
-      - csrftoken=c89c3540eeaee67d6b3c5cd5484f5ccf; expires=Sat, 30-Apr-2016 03:14:19
+      - csrftoken=3a9def308727a53aaad7bac9d6c451ff; expires=Sat, 30-Apr-2016 03:14:20
         GMT; Max-Age=31449600; Path=/
       Connection:
       - keep-alive
@@ -421,5 +421,5 @@ http_interactions:
         Curtis"},"id":"968076402421827294"},"type":"video","id":"968076401163535631_422234768","user":{"username":"pixiecurtis","profile_picture":"http:\/\/photos-c.ak.instagram.com\/hphotos-ak-xfa1\/t51.2885-19\/10707094_279379942260762_1531140511_a.jpg","id":"422234768","full_name":"Pixie
         Curtis"}}]}'
     http_version: 
-  recorded_at: Sat, 02 May 2015 03:14:19 GMT
+  recorded_at: Sat, 02 May 2015 03:14:20 GMT
 recorded_with: VCR 2.9.3
