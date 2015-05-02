@@ -1,9 +1,18 @@
 class MomentsController < ApplicationController
   def index
-    @moments = InstagramMoment.new(lat, long, time).instagrams
+    @moments = InstagramMoment.new(lat, long, time).instagrams if params[:location]
   end
 
   private
+
+  #a helper method means this method is available for use in the view 
+  helper_method :moments
+
+  def moments
+    # In the case that @moments isn't assigned, create an empty array
+    # so that our view .each method doesn't blow up.
+    @moments || Array.new
+  end
 
   def location
     #if location is nil search with geocoder otherwise return the location 
@@ -19,7 +28,7 @@ class MomentsController < ApplicationController
   end
 
   def time
-    Time.now
+    Chronic.parse(params[:time])
   end
 end
 

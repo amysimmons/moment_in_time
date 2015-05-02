@@ -1,11 +1,12 @@
 <h1>Moments#index</h1>
 
 <%= form_tag moments_path, method: :get do %>
-  <%= text_field_tag :location %>
+  <%= text_field_tag :time, nil, placeholder: 'eg. Two weeks ago' %>
+  <%= text_field_tag :location, nil, placeholder: 'eg. Bondi Beach' %>
   <%= submit_tag 'Find moments' %>
 <% end %>
 
-<% @moments.each do |moment| %>
+<% moments.each do |moment| %>
 
   <%= image_tag(moment["images"]["standard_resolution"]["url"]) %>
 
