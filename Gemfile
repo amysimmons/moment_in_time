@@ -11,6 +11,7 @@ gem 'geocoder'
 gem 'twitter', '~> 5.14.0'
 gem 'instagram'
 gem 'chronic'
+gem 'bourbon'
 
 group :development do
  gem 'pry-rails'
