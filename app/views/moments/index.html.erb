@@ -1,4 +1,4 @@
-<h1>Moments#index</h1>
+<h1>Moment in Time</h1>
 
 <%= form_tag moments_path, method: :get do %>
   <%= text_field_tag :time, nil, placeholder: 'eg. Two weeks ago' %>
@@ -8,6 +8,8 @@
 
 <% moments.each do |moment| %>
 
+<div style="<%= random_page_position %>" class="img-container <%= random_floating_image_class %>">
   <%= image_tag(moment["images"]["standard_resolution"]["url"]) %>
+</div>
 
 <% end %>
