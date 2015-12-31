@@ -2,6 +2,55 @@
  *= require_self
  */
 
+body {
+  margin: 0;
+}
+
+body, input {
+  font-family: 'Oxygen', sans-serif;
+}
+
+header {
+  padding: 2% 0;
+  border-bottom: 1px solid #edeeee;
+}
+
+.moment-in-time {
+  text-align: center;
+  display: block;
+  font-weight: 300;
+  font-size: 3em;
+  margin: 0;
+}
+
+.find-moments-form {
+  text-align: center;
+  display: block;
+  margin: 20px 0;
+}
+
+input {
+  width: 185px;
+  margin: 0 5px;
+  font-weight: 300;
+  font-size: 1em;
+  border-radius: 15px;
+  border: solid 1px #edeeee;
+  cursor: text;
+  padding: 7px;
+  text-align: center;
+  background-color: #fff;
+  color: #818488;
+  outline: none;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -mox-box-sizing: border-box;
+}
+
+.find-btn {
+  cursor: pointer;
+}
+
 @import 'bourbon';
 
 @include keyframes(floating-zoom){

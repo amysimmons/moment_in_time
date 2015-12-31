@@ -1,15 +1,15 @@
-<h1>Moment in Time</h1>
-
-<%= form_tag moments_path, method: :get do %>
-  <%= text_field_tag :time, nil, placeholder: 'eg. Two weeks ago' %>
-  <%= text_field_tag :location, nil, placeholder: 'eg. Bondi Beach' %>
-  <%= submit_tag 'Find moments' %>
-<% end %>
-
-<% moments.each do |moment| %>
-
-<div style="<%= random_page_position %>" class="img-container <%= random_floating_image_class %>">
-  <%= image_tag(moment["images"]["standard_resolution"]["url"]) %>
-</div>
-
-<% end %>
+<header>
+	<h1 class="moment-in-time">moment in time</h1>
+	<%= form_tag moments_path, class: "find-moments-form", method: :get do %>
+	  <%= text_field_tag :time, nil, placeholder: 'eg. Two weeks ago' %>
+	  <%= text_field_tag :location, nil, placeholder: 'eg. Bondi Beach' %>
+	  <%= submit_tag 'Find moments', class: "find-btn" %>
+	<% end %>
+</header>
+<section class="moments">
+	<% moments.each do |moment| %>
+		<div style="<%= random_page_position %>" class="img-container <%= random_floating_image_class %>">
+		  <%= image_tag(moment["images"]["standard_resolution"]["url"]) %>
+		</div>
+	<% end %>
+</section>
