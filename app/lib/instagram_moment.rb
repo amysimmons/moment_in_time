@@ -11,7 +11,13 @@ class InstagramMoment
   end
 
   def instagrams
-    query
+    query.map do |i| 
+      {
+        source: "instagram", 
+        post_datetime: Time.at(i[:created_time].to_i).in_time_zone("UTC"),
+        data: i
+      }
+    end
   end
 
   private

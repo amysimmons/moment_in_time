@@ -16,7 +16,14 @@ class TwitterMoment
 
   def tweets
     # raw_tweets.select {|t| t.geo?}
-    raw_tweets.attrs[:statuses].select {|t| t[:entities][:urls].count > 0 }
+    tweets_with_images = raw_tweets.attrs[:statuses].select {|t| t[:entities][:urls].count > 0 }
+    tweets_with_images.map do |t| 
+      {
+        source: "twitter", 
+        post_datetime: t[:created_at].in_time_zone("UTC"),
+        data: t
+      }
+    end
   end
 
   private

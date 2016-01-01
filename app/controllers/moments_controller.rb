@@ -7,15 +7,24 @@ class MomentsController < ApplicationController
   private
 
   #a helper method means this method is available for use in the view 
-  helper_method :moments, :rows
+  helper_method :moments, :rows, :instagram_moments, :twitter_moments
 
   def moments
     # In the case that @moments isn't assigned, create an empty array
     # so that our view .each method doesn't blow up.
-    @moments = @instagram_moments + @twitter_moments
-    binding.pry
+    @moments = sort_moments((@instagram_moments || Array.new) + (@twitter_moments || Array.new))
+  end
 
-    # @moments || Array.new
+  def instagram_moments
+    @instagram_moments
+  end
+
+  def twitter_moments
+    @twitter_moments
+  end
+
+  def sort_moments(moments)
+      moments.sort_by{|m|m[:post_datetime]}
   end
 
   def rows

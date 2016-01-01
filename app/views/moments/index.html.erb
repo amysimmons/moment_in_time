@@ -11,7 +11,15 @@
 		<div class="row">
 			<% row.each do |moment| %>
 				<div style="<%= random_page_position %>" class="img-container <%= random_floating_image_class %>">
-				  <%= image_tag(moment["images"]["standard_resolution"]["url"]) %>
+				  <% if moment[:source] == "instagram" %>
+
+				  	<%= image_tag(moment[:data]["images"]["standard_resolution"]["url"]) %>
+				  
+				  <% elsif moment[:source] == "twitter" %>
+				  		
+				  	<%= image_tag(moment[:data][:entities][:urls][0][:url]) %>
+
+				  <% end %>
 				</div>
 			<% end %>
 		</div>
