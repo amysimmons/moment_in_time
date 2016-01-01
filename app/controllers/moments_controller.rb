@@ -1,6 +1,7 @@
 class MomentsController < ApplicationController
   def index
-    @moments = InstagramMoment.new(lat, long, time).instagrams if params[:location]
+    @instagram_moments = InstagramMoment.new(lat, long, time).instagrams if params[:location]
+    @twitter_moments = TwitterMoment.new(lat, long, time).tweets if params[:location]
   end
 
   private
@@ -11,7 +12,10 @@ class MomentsController < ApplicationController
   def moments
     # In the case that @moments isn't assigned, create an empty array
     # so that our view .each method doesn't blow up.
-    @moments || Array.new
+    @moments = @instagram_moments + @twitter_moments
+    binding.pry
+
+    # @moments || Array.new
   end
 
   def rows

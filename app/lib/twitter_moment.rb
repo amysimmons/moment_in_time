@@ -1,9 +1,10 @@
 class TwitterMoment
 
-  attr_reader :time, :location
+  attr_reader :lat, :long, :time
 
-  def initialize(location, time)
-    @location = location
+  def initialize(lat, long, time)
+    @lat = lat
+    @long = long
     @time = time
   end
 
@@ -14,17 +15,20 @@ class TwitterMoment
   end
 
   def tweets
-    raw_tweets.select {|t| t.geo? }
+    # raw_tweets.select {|t| t.geo?}
+    raw_tweets.attrs[:statuses].select {|t| t[:entities][:urls].count > 0 }
   end
 
   private
 
   def query
+    #geocode returns tweets by users located within a given radius of 
+    #the given latitude/longitude.
     $twitter
       .search("e since:#{from_date} until:#{to_date}",
-              geocode: "-33.8910,151.2777,10km",
+              geocode: "#{lat},#{long},10km",
               lang: "en",
-              count: 10
+              count: "100"
               )
   end
 
