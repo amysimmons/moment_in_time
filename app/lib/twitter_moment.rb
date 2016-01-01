@@ -16,13 +16,16 @@ class TwitterMoment
 
   def tweets
     # raw_tweets.select {|t| t.geo?}
-    tweets_with_images = raw_tweets.attrs[:statuses].select {|t| t[:entities][:urls].count > 0 }
-    tweets_with_images.map do |t| 
+    # binding.pry
+
+    # tweets_with_images = raw_tweets.attrs[:statuses].select {|t| t[:entities][:media].count > 0 }
+    raw_tweets.attrs[:statuses].map do |t| 
       {
         source: "twitter", 
         post_datetime: t[:created_at].in_time_zone("UTC"),
         data: t
       }
+
     end
   end
 
@@ -35,7 +38,7 @@ class TwitterMoment
       .search("e since:#{from_date} until:#{to_date}",
               geocode: "#{lat},#{long},10km",
               lang: "en",
-              count: "100"
+              count: 100
               )
   end
 

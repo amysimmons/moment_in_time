@@ -17,8 +17,10 @@
 				  
 				  <% elsif moment[:source] == "twitter" %>
 				  		
-				  	<%= image_tag(moment[:data][:entities][:urls][0][:url]) %>
-
+					<%=content_tag(:p, moment[:data][:text])%>
+				 	<% if moment[:data][:entities][:media] %>
+				  		<%= image_tag(moment[:data][:entities][:media][0][:media_url]) %>
+				  	<% end %>
 				  <% end %>
 				</div>
 			<% end %>
