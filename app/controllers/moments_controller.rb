@@ -6,12 +6,20 @@ class MomentsController < ApplicationController
   private
 
   #a helper method means this method is available for use in the view 
-  helper_method :moments
+  helper_method :moments, :rows
 
   def moments
     # In the case that @moments isn't assigned, create an empty array
     # so that our view .each method doesn't blow up.
     @moments || Array.new
+  end
+
+  def rows
+    if moments.length > 0
+      @moments.each_slice(5).to_a 
+    else 
+      Array.new
+    end 
   end
 
   def location

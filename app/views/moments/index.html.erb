@@ -7,9 +7,13 @@
 	<% end %>
 </header>
 <section class="moments">
-	<% moments.each do |moment| %>
-		<div style="<%= random_page_position %>" class="img-container <%= random_floating_image_class %>">
-		  <%= image_tag(moment["images"]["standard_resolution"]["url"]) %>
+	<% rows.each do |row| %>
+		<div class="row">
+			<% row.each do |moment| %>
+				<div style="<%= random_page_position %>" class="img-container <%= random_floating_image_class %>">
+				  <%= image_tag(moment["images"]["standard_resolution"]["url"]) %>
+				</div>
+			<% end %>
 		</div>
 	<% end %>
 </section>
