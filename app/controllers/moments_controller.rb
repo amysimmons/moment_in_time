@@ -1,7 +1,7 @@
 class MomentsController < ApplicationController
   def index
     @instagram_moments = InstagramMoment.new(lat, long, time).instagrams if params[:location]
-    @twitter_moments = TwitterMoment.new(lat, long, time).tweets if params[:location]
+    @twitter_moments = TwitterMoment.new(lat, long, bounds, time).tweets if params[:location]
   end
 
   private
@@ -46,6 +46,26 @@ class MomentsController < ApplicationController
 
   def long
     location.coordinates[1]
+  end
+
+  def southwest_bound_lng
+    location.geometry["bounds"]["southwest"]["lng"]
+  end
+
+  def southwest_bound_lat
+    location.geometry["bounds"]["southwest"]["lat"]
+  end
+
+  def northeast_bound_lng
+    location.geometry["bounds"]["northeast"]["lng"]  
+  end
+
+  def northeast_bound_lat
+    location.geometry["bounds"]["northeast"]["lat"]  
+  end
+
+  def bounds
+    southwest_bound_lng.to_s + "," + southwest_bound_lat.to_s + "," + northeast_bound_lng.to_s + "," + northeast_bound_lat.to_s
   end
 
   def time

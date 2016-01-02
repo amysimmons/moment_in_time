@@ -12,6 +12,7 @@ gem 'twitter', '~> 5.14.0'
 gem 'instagram'
 gem 'chronic'
 gem 'bourbon'
+gem 'httparty'
 
 group :development do
  gem 'pry-rails'

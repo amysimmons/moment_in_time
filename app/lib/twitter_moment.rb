@@ -2,9 +2,10 @@ class TwitterMoment
 
   attr_reader :lat, :long, :time
 
-  def initialize(lat, long, time)
+  def initialize(lat, long, bounds, time)
     @lat = lat
     @long = long
+    @bounds = bounds
     @time = time
   end
 
@@ -32,13 +33,23 @@ class TwitterMoment
   private
 
   def query
+
+    binding.pry
+
+    response = HTTParty.get("https://stream.twitter.com/1.1/statuses/filter.json?locations=-#{@bounds}")
+
+    #POST statuses/filter
+    #https://dev.twitter.com/streaming/overview/request-parameters#locations
+    #https://stream.twitter.com/1.1/statuses/filter.json?locations=-122.75,36.8,-121.75,37.8
+   
     #geocode returns tweets by users located within a given radius of 
     #the given latitude/longitude.
     $twitter
       .search("e since:#{from_date} until:#{to_date}",
               geocode: "#{lat},#{long},10km",
               lang: "en",
-              count: 100
+              count: 100,
+              filter: "images"
               )
   end
 
