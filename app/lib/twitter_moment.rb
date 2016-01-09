@@ -1,3 +1,7 @@
+require 'httparty'
+require 'oauth'
+# require 'oauth/request_proxy/typhoeus_request'
+
 class TwitterMoment
 
   attr_reader :lat, :long, :time
@@ -16,40 +20,25 @@ class TwitterMoment
   end
 
   def tweets
-    # raw_tweets.select {|t| t.geo?}
-    # binding.pry
-
-    # tweets_with_images = raw_tweets.attrs[:statuses].select {|t| t[:entities][:media].count > 0 }
-    raw_tweets.attrs[:statuses].map do |t| 
+     raw_tweets.attrs[:statuses].map do |t| 
       {
         source: "twitter", 
         post_datetime: t[:created_at].in_time_zone("UTC"),
+        oembed: $twitter.get("https://api.twitter.com/1.1/statuses/oembed.json?id=#{t[:id]}"),
         data: t
       }
-
     end
   end
 
   private
-
   def query
-
-    binding.pry
-
-    response = HTTParty.get("https://stream.twitter.com/1.1/statuses/filter.json?locations=-#{@bounds}")
-
-    #POST statuses/filter
-    #https://dev.twitter.com/streaming/overview/request-parameters#locations
-    #https://stream.twitter.com/1.1/statuses/filter.json?locations=-122.75,36.8,-121.75,37.8
-   
     #geocode returns tweets by users located within a given radius of 
     #the given latitude/longitude.
     $twitter
       .search("e since:#{from_date} until:#{to_date}",
               geocode: "#{lat},#{long},10km",
               lang: "en",
-              count: 100,
-              filter: "images"
+              count: 100
               )
   end
 

@@ -13,14 +13,12 @@
 				<div style="<%= random_page_position %>" class="img-container <%= random_floating_image_class %>">
 				  <% if moment[:source] == "instagram" %>
 
-				  	<%= image_tag(moment[:data]["images"]["standard_resolution"]["url"]) %>
-				  
+				  	<%= raw(moment[:oembed]["html"]) %>
+				  	
 				  <% elsif moment[:source] == "twitter" %>
-				  		
-					<%=content_tag(:p, moment[:data][:text])%>
-				 	<% if moment[:data][:entities][:media] %>
-				  		<%= image_tag(moment[:data][:entities][:media][0][:media_url]) %>
-				  	<% end %>
+				
+					<%= raw(moment[:oembed][:html]) %>
+
 				  <% end %>
 				</div>
 			<% end %>

@@ -13,6 +13,8 @@ gem 'instagram'
 gem 'chronic'
 gem 'bourbon'
 gem 'httparty'
+gem 'oauth'
+gem 'metamagic'
 
 group :development do
  gem 'pry-rails'

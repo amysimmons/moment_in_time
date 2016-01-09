@@ -15,6 +15,7 @@ class InstagramMoment
       {
         source: "instagram", 
         post_datetime: Time.at(i[:created_time].to_i).in_time_zone("UTC"),
+        oembed: HTTParty.get("https://api.instagram.com/oembed?url=#{i["link"]}"),
         data: i
       }
     end
